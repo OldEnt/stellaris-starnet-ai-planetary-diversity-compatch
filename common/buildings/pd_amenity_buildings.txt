@@ -24,13 +24,61 @@ building_luxury_residence = {
 		}
 	}
 
+	allow = {
+		hidden_trigger = {
+			OR = {
+				owner = { is_ai = no }
+				AND = {
+					NOR = {
+						has_building = building_luxury_residence
+						has_building = building_research_lab_1
+					}
+					is_capital = no
+					num_pops >= 13
+					free_jobs > 2
+					OR = {
+						AND = {
+							free_amenities < -4
+							free_amenities > -9
+							OR = {
+								free_district_slots < 3
+								num_pops < 16
+							}
+						}
+						AND = {
+							free_building_slots > 1
+							free_amenities < -2
+							free_amenities > -6
+							free_district_slots = 0
+							has_building = building_holo_theatres
+						}
+					}
+				}
+			}
+		}
+	}
+
 	destroy_trigger = {
 		exists = owner
 		OR = {
 			AND = {
 				free_building_slots = 0
-				free_jobs < 1
+				free_jobs < -2
 				free_housing > 10
+				free_district_slots = 0
+				owner = {
+					is_ai = yes
+				}
+			}
+			AND = {
+				owner = { lategame = no }
+				num_buildings = {
+					type = building_research_lab_1
+					value > 1	
+				}
+				free_jobs < 1
+				free_amenities > 6
+				free_building_slots = 0
 				owner = {
 					is_ai = yes
 				}
@@ -77,6 +125,59 @@ building_luxury_residence = {
 	upgrades = {
 		"building_paradise_dome"
 	}
+	#Fake resource production to ensure construction
+#	ai_resource_production = {
+		#alloys = 10
+		#trigger = {
+			#num_pops > 15
+			#free_amenities > -7
+			#or = { free_amenities < -4 num_pops > 20 }
+			#free_housing < 25
+			#free_jobs > 1
+			#free_building_slots > 0
+			#or = { has_planet_flag = str_good_habitability
+			#has_planet_flag = str_acceptable_habitability }
+			#owner = {
+				#has_country_flag = str_has_room_to_grow
+				#resource_stockpile_compare = {
+					#resource = alloys
+					#value > 1000
+				#}
+				#resource_income_compare = {
+					#resource = alloys
+					#value > 20
+				#}
+			#}
+		#}
+	#}
+	#ai_resource_production = {
+		#energy = 4
+		#trigger = {
+			#num_pops > 15
+			#free_amenities < -4
+			#free_housing < 20
+			#free_jobs > 1
+			#or = { has_planet_flag = str_good_habitability
+			#has_planet_flag = str_acceptable_habitability }
+			#owner = {
+				#has_country_flag = str_has_room_to_grow
+			#}
+		#}
+	#}
+	#ai_resource_production = {
+		#minerals = 4
+		#trigger = {
+			#num_pops > 15
+			#free_amenities < -4
+			#free_housing < 20
+			#free_jobs > 1
+			#or = { has_planet_flag = str_good_habitability
+			#has_planet_flag = str_acceptable_habitability }
+			#owner = {
+				#has_country_flag = str_has_room_to_grow
+			#}
+		#}
+	#}
 }
 
 building_paradise_dome = {
@@ -106,6 +207,9 @@ building_paradise_dome = {
 
 	allow = {
 		has_upgraded_capital = yes
+		hidden_trigger = {
+			owner = { is_ai = no }
+		}
 	}
 
 	destroy_trigger = {
@@ -115,6 +219,7 @@ building_paradise_dome = {
 			owner = { has_valid_civic = civic_shared_burden }
 			buildings_no_crystals = yes
 			has_modifier = slave_colony
+			owner = { is_ai = yes }
 		}
 	}
 
@@ -191,7 +296,37 @@ building_communal_housing = {
 	}
 
 	allow = {
-		buildings_simple_allow = yes
+		hidden_trigger = {
+			OR = {
+				owner = { is_ai = no }
+				AND = {
+					NOR = {
+						has_building = building_communal_housing
+						has_building = building_research_lab_1
+					}
+					is_capital = no
+					num_pops >= 13
+					free_jobs > 2
+					OR = {
+						AND = {
+							free_amenities < -4
+							free_amenities > -9
+							OR = {
+								free_district_slots < 3
+								num_pops < 16
+							}
+						}
+						AND = {
+							free_building_slots > 1
+							free_amenities < -2
+							free_amenities > -6
+							free_district_slots = 0
+							has_building = building_holo_theatres
+						}
+					}
+				}
+			}
+		}
 	}
 
 	destroy_trigger = {
@@ -200,8 +335,25 @@ building_communal_housing = {
 			AND = {
 				owner = { is_ai = yes }
 				free_building_slots = 0
-				free_jobs < 1
+				free_jobs < -2
 				free_housing > 10
+				free_district_slots = 0
+				free_amenities > 2
+				
+			}
+			AND = {
+				owner = {
+					is_ai = yes
+					lategame = no
+				}
+				num_buildings = {
+					type = building_research_lab_1
+					value > 1
+				}
+				free_jobs < 1
+				free_amenities > 6
+				free_building_slots = 0
+
 			}
 			AND = {
 				is_planet_class = pc_habitat
@@ -253,6 +405,59 @@ building_communal_housing = {
 	upgrades = {
 		"building_communal_housing_large"
 	}
+
+#	ai_resource_production = {
+		#alloys = 10
+		#trigger = {
+			#num_pops > 15
+			#free_amenities > -7
+			#or = { free_amenities < -4 num_pops > 20 }
+			#free_housing < 25
+			#free_jobs > 1
+			#free_building_slots > 0
+			#or = { has_planet_flag = str_good_habitability
+			#has_planet_flag = str_acceptable_habitability }
+			#owner = {
+				#has_country_flag = str_has_room_to_grow
+				#resource_stockpile_compare = {
+					#resource = alloys
+					#value > 1000
+				#}
+				#resource_income_compare = {
+					#resource = alloys
+					#value > 20
+				#}
+			#}
+		#}
+	#}
+#	ai_resource_production = {
+		#energy = 1
+		#trigger = {
+			#num_pops > 15
+			#free_amenities < -4
+			#free_housing < 20
+			#free_jobs > 1
+			#or = { has_planet_flag = str_good_habitability
+			#has_planet_flag = str_acceptable_habitability }
+			#owner = {
+				#has_country_flag = str_has_room_to_grow
+			#}
+		#}
+	#}
+	#ai_resource_production = {
+		#minerals = 1
+		#trigger = {
+			#num_pops > 15
+			#free_amenities < -4
+			#free_housing < 20
+			#free_jobs > 1
+			#or = { has_planet_flag = str_good_habitability
+			#has_planet_flag = str_acceptable_habitability }
+			#owner = {
+				#has_country_flag = str_has_room_to_grow
+			#}
+		#}
+	#}
 }
 
 building_communal_housing_large = {
@@ -283,6 +488,9 @@ building_communal_housing_large = {
 
 	allow = {
 		has_upgraded_capital = yes
+		hidden_trigger = {
+			owner = { is_ai = no }
+		}
 	}
 
 	destroy_trigger = {
@@ -290,6 +498,7 @@ building_communal_housing_large = {
 		OR = {
 			has_modifier = slave_colony
 			buildings_no_crystals = yes
+			owner = { is_ai = yes }
 		}
 	}
 
