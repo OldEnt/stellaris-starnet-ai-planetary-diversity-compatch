@@ -6,7 +6,7 @@ tags={
 	"Gameplay"
 }
 dependencies={
-	"~ Starnet AI"
+	"~ StarNet AI"
 	"StarTech AI"
 }
 name="StarNet AI - Planetary Diversity compatibility patch"
