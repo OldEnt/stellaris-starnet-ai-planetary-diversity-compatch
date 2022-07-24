@@ -21,6 +21,10 @@ district_arcology_housing = {
 		}
 	}
 
+	allow = {
+		str_city_district_allow = yes
+	}
+
 	conversion_ratio = 1
 	convert_to = {
 		district_city
@@ -534,6 +538,10 @@ district_arcology_leisure = {
 		}
 	}
 
+	allow = {
+		str_habitat_culture_allow = yes
+	}
+
 	conversion_ratio = 1
 	convert_to = {
 		district_arcology_organic_housing
@@ -695,6 +703,10 @@ district_arcology_administrative = 	{
 		}
 	}
 
+	allow = {
+		str_habitat_culture_allow = yes
+	}
+
 	conversion_ratio = 1
 	convert_to = {
 		district_nexus
@@ -794,6 +806,10 @@ district_arcology_religious = {
 			exists = owner
 			is_spiritualist = yes
 		}
+	}
+
+	allow = {
+		str_habitat_culture_allow = yes
 	}
 
 	conversion_ratio = 1
