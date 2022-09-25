@@ -19,6 +19,7 @@ col_default = {
 		has_upgraded_capital = no
 		is_special_colony_type = no
 		num_sapient_pops < 5
+		NOT = { uses_district_set = pdcrucible }
 	}
 
 	planet_modifier = {
@@ -47,6 +48,7 @@ col_default_machine = {
 		has_upgraded_capital = no
 		is_special_colony_type = no
 		num_sapient_pops < 5 # Non-sapient machines are included
+		NOT = { uses_district_set = pdcrucible }
 	}
 
 	planet_modifier = {
@@ -89,6 +91,7 @@ col_city = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -127,6 +130,7 @@ col_mining = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 		OR = {
@@ -275,6 +279,7 @@ col_farming = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 		OR = {
@@ -410,6 +415,7 @@ col_generator = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -550,6 +556,7 @@ col_hive = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -590,6 +597,7 @@ col_nexus = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -635,6 +643,7 @@ col_industrial = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -1116,7 +1125,6 @@ col_factory = {
 		}
 	}
 
-	# Used by AI to estimate the current effects of this designation
 	ai_resource_current_conversion = {
 		alloys = -0.5
 		consumer_goods = 1
@@ -1150,6 +1158,7 @@ col_factory = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 		OR = {
@@ -1476,6 +1485,7 @@ col_refinery = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -1521,6 +1531,16 @@ col_research = {
 			uses_district_set = city_world
 			uses_district_set = ring_world
 			uses_district_set = habitat
+			uses_district_set = pdarchive
+			uses_district_set = pdecocity
+			uses_district_set = pdpalacearc
+			uses_district_set = pdplanethab	
+			uses_district_set = pdbiocapital
+			uses_district_set = pdmachinefactory
+			uses_district_set = pdmachinecapital
+			uses_district_set = pdmilarc
+			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -1637,6 +1657,7 @@ col_fortress = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -2121,6 +2142,66 @@ col_habitat_farming = {
 	}
 }
 
+col_habitat_gestalt_farming = {
+	icon = GFX_colony_type_habitat_farming
+
+	potential = {
+		uses_district_set = habitat
+		exists = owner
+		owner = {
+			is_gestalt = yes
+		}
+	}
+	custom_tooltip = col_habitat_farming_gestalt_custom
+	planet_modifier = {
+		planet_building_hydroponics_farm_build_speed_mult = 0.25
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				is_galactic_community_member = yes
+			}
+			OR = {
+				is_active_resolution = "resolution_greatergood_five_year_plans"
+				is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+				is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+				is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+			}
+		}
+		modifier = {
+			planet_jobs_simple_drone_produces_mult = 0.1
+		}
+	}
+
+	weight_modifier = {
+		base = 1000
+		modifier = {
+			factor = 2
+			owner = { has_monthly_income = { resource = food value < 0 } }
+		}
+		modifier = {
+			factor = 3
+			has_designation = col_habitat_gestalt_farming
+		}
+		modifier = {
+			factor = 3
+			num_buildings = { type = building_hydroponics_farm value >= 1 }
+		}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "production" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+	}
+}
+
+
 # Habitat Fortress
 col_habitat_fortress = {
 	icon = GFX_colony_type_habitat_fortress
@@ -2137,6 +2218,16 @@ col_habitat_fortress = {
 		planet_building_stronghold_build_speed_mult = 0.25
 		planet_orbital_bombardment_damage = -0.10
 		army_defense_damage_mult = 0.20
+	}
+	triggered_planet_modifier = {
+		potential = {
+			OR = {
+				has_building = building_order_keep
+				has_building = building_order_castle
+			}
+		}
+		knights_independent_category_produces_mult = 0.1
+		pop_defense_armies_add = 1
 	}
 	weight_modifier = {
 		base = 0
@@ -2510,6 +2601,7 @@ col_rural_gestalt = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		exists = owner
 		owner = { is_gestalt = yes }
@@ -2669,6 +2761,7 @@ col_rural = {
 			uses_district_set = pdbiofort
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -3474,7 +3567,6 @@ col_ecu_research = {
 
 	weight_modifier = {
 		base = 10
-
 		modifier = {
 			add = 5
 			owner = { has_monthly_income = { resource = physics_research value < 200 } }
@@ -3753,8 +3845,9 @@ col_bureau = {
 			is_regular_empire = yes
 			is_spiritualist = no
 		}
-		NOT = {
+		NOR = {
 			uses_district_set = habitat
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -3843,8 +3936,9 @@ col_bureau_spiritualist = {
 			is_regular_empire = yes
 			is_spiritualist = yes
 		}
-		NOT = {
+		NOR = {
 			uses_district_set = habitat
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -3949,8 +4043,9 @@ col_bureau_hive = {
 	potential = {
 		exists = owner
 		owner = { is_hive_empire = yes }
-		NOT = {
+		NOR = {
 			uses_district_set = habitat
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -4023,8 +4118,9 @@ col_bureau_machine = {
 	potential = {
 		exists = owner
 		owner = { is_machine_empire = yes }
-		NOT = {
+		NOR = {
 			uses_district_set = habitat
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
         OR = {
@@ -4377,6 +4473,186 @@ col_habitat_bureau_machine = {
 				num_buildings = { type = building_network_junction value = 0 }
 				num_buildings = { type = building_system_conflux value = 0 }
 			}
+		}
+	}
+}
+
+# PD Complex Hive Planets
+col_pd_hive = {
+	icon = GFX_colony_type_urban
+
+	potential = {
+		OR = {
+			is_planet_class = pc_bioforge
+			is_planet_class = pc_megafloraforge
+			is_planet_class = pc_biofort
+			is_planet_class = pc_megaflorafort
+			uses_district_set = pdbiocapital
+			uses_district_set = pdfloracapital
+		}
+		exists = owner
+		owner = { is_hive_empire = yes }
+		is_special_colony_type = no
+	}
+	
+	planet_modifier = {
+		planet_districts_cost_mult = -0.10
+		planet_jobs_complex_drone_produces_mult = 0.05
+	}
+
+	weight_modifier = {
+		modifier = {
+			add = 1
+			num_free_districts = { type = district_bioforge_maintenance value < @free_districts_low_threshold }
+			num_free_districts = { type = district_hive value >= @free_districts_medium_threshold }
+		}
+		modifier = {
+			add = 3
+			num_free_districts = { type = district_bioforge_maintenance value < @free_districts_low_threshold }
+			num_free_districts = { type = district_hive value >= @free_districts_medium_threshold }
+		}
+		modifier = {
+			add = 5
+			has_modifier = natural_beauty
+		}
+		modifier = {
+			add = 5
+			num_districts = { type = district_hive value >= @built_districts_high_threshold }
+		}
+	}
+}
+
+# PD Special Nexus Planet
+col_pd_nexus = {
+	icon = GFX_colony_type_urban
+
+	potential = {
+		OR = {
+			uses_district_set = pdmachinefactory
+			uses_district_set = pdmachinefort
+			uses_district_set = pdmachinecapital
+		}
+		exists = owner
+		owner = { is_machine_empire = yes }
+		is_special_colony_type = no
+	}
+	
+	planet_modifier = {
+		planet_districts_cost_mult = -0.10
+		planet_jobs_complex_drone_produces_mult = 0.05
+	}
+
+	weight_modifier = {
+		modifier = {
+			add = 1
+			num_free_districts = { type = district_mf_replicator value < @free_districts_low_threshold }
+			num_free_districts = { type = district_pdmachinefort_naval value < @free_districts_low_threshold }
+			num_free_districts = { type = district_pdmachinefort_synapse value < @free_districts_low_threshold }
+			num_free_districts = { type = district_nexus value >= @free_districts_medium_threshold }
+		}
+		modifier = {
+			add = 3
+			num_free_districts = { type = district_mf_replicator value < @free_districts_low_threshold }
+			num_free_districts = { type = district_pdmachinefort_naval value < @free_districts_low_threshold }
+			num_free_districts = { type = district_pdmachinefort_synapse value < @free_districts_low_threshold }
+			num_free_districts = { type = district_nexus value >= @free_districts_high_threshold }
+		}
+		modifier = {
+			add = 5
+			has_modifier = natural_beauty
+		}
+		modifier = {
+			add = 5
+			num_districts = { type = district_nexus value >= @built_districts_high_threshold }
+		}
+	}
+}
+
+# PD Fortress Planet
+col_pd_fortress = {
+	icon = GFX_colony_type_fortress
+
+	potential = {
+		is_planet_class = pc_milarc
+		exists = owner
+		is_special_colony_type = no
+	}
+	
+	planet_modifier = {
+		planet_jobs_upkeep_mult = -0.05
+		planet_districts_cost_mult = -0.1
+	}
+
+	weight_modifier = {
+		modifier = {
+			add = 5
+			has_designation = col_pd_fortress
+		}
+		modifier = {
+			add = 3
+			num_buildings = { type = building_stronghold value >= 2 }
+		}
+		modifier = {
+			add = 4
+			num_buildings = { type = building_stronghold value >= 3 }
+		}
+		modifier = {
+			add = 5
+			num_buildings = { type = building_stronghold value >= 4 }
+		}
+		modifier = {
+			add = 3
+			num_buildings = { type = building_fortress value >= 1 }
+		}
+		modifier = {
+			add = 5
+			num_buildings = { type = building_fortress value >= 2 }
+		}
+		modifier = {
+			add = 10
+			is_planet_class = pc_milarc
+		}
+	}
+}
+
+# Ecumenpolis Refinery
+col_ecu_refinery = {
+	icon = GFX_colony_type_refinery
+
+	potential = {
+		uses_district_set = city_world
+	}
+
+	planet_modifier = {
+		planet_refiners_produces_mult = 0.05
+		planet_translucers_produces_mult = 0.05
+		planet_chemists_produces_mult = 0.05
+	}
+
+	weight_modifier = {
+		base = 10
+	}
+}
+
+# Ecumenpolis Trade
+col_ecu_trade = {
+	icon = GFX_colony_type_urban
+
+	potential = {
+		OR = {
+		uses_district_set = pdecocity
+		uses_district_set = pdcorpoarc
+		}
+	}
+	
+	planet_modifier = {
+		trade_value_mult = 0.25
+	}
+
+	weight_modifier = {
+		modifier = {
+			add = 2
+			has_designation = col_ecu_trade
 		}
 	}
 }

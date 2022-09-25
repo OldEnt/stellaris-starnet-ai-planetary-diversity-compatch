@@ -248,7 +248,6 @@ building_hall_judgment = {
 	}
 }
 
-
 building_sentinel_posts = {
 	base_buildtime = @b1_time
 
@@ -306,6 +305,124 @@ building_sentinel_posts = {
 	}
 }
 
+building_order_keep = {
+	base_buildtime = 180
+
+	can_demolish = no
+	can_be_disabled = no
+
+	empire_limit = {
+	 	base = 1
+	}
+
+	potential = {
+		owner = { has_origin = origin_toxic_knights }
+		has_planet_flag = toxic_knights_habitat
+		owner = { NOT = { has_country_flag = quest_abandoned } }
+	}
+
+	destroy_trigger = {
+		OR = {
+			NOT = { exists = owner }
+			NOT = { owner = { has_origin = origin_toxic_knights } }
+		}
+	}
+
+	planet_modifier = {
+		job_squire_add = 1
+		job_knight_add = 1
+		job_knight_per_pop = 0.05 # 1 for every 10 pop while quest active. 1 for 20 after quest.
+
+		planet_immigration_pull_add = 5
+		planet_resettlement_unemployed_destination_mult = 1
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			owner = { has_country_flag = toxoids_7060_A }
+		}
+		modifier = { job_knight_add = 1 }
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			owner = { NOT = { has_country_flag = quest_over } }
+		}
+		modifier = {
+			job_knight_add = 1
+			job_knight_per_pop = 0.05
+		}
+	}
+
+
+	resources = {
+		cost = {
+			minerals = 1000
+		}
+		category = planet_buildings
+	}
+
+	triggered_desc = {
+		text = building_order_keep_effect
+	}
+
+	triggered_desc = {
+		text = job_knight_effect_desc
+	}
+
+	triggered_desc = {
+		text = job_squire_effect_desc
+	}
+}
+
+building_order_castle = {
+	icon = building_order_holding
+	base_buildtime = 180
+	can_demolish = no
+	can_be_disabled = no
+	can_build = no
+
+	destroy_trigger = {
+		OR = {
+			NOT = { exists = owner }
+			NOT = { owner = { has_origin = origin_toxic_knights } }
+		}
+	}
+
+	planet_modifier = {
+		job_squire_add = 1
+		job_knight_add = 1
+
+		planet_immigration_pull_add = 1
+		planet_resettlement_unemployed_destination_mult = 0.2
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			owner = { NOT = { has_country_flag = quest_over } }
+		}
+		modifier = {
+			job_knight_add = 1
+		}
+	}
+
+	resources = {
+		category = planet_buildings
+	}
+
+	triggered_desc = {
+		text = building_order_keep_effect
+	}
+
+	triggered_desc = {
+		text = job_knight_effect_desc
+	}
+
+	triggered_desc = {
+		text = job_squire_effect_desc
+	}
+}
+
 #############
 # Ascension perks
 #############
@@ -320,10 +437,11 @@ building_psi_corps = {
 
 	potential = {
 		host_has_dlc = "Utopia"
-		owner = { 
+		owner = {
 			OR = {
 				has_ascension_perk = ap_mind_over_matter
 				has_origin = origin_shroudwalker_apprentice
+				has_origin = origin_pd_shroud
 			}
 		}
 		NOT = { has_modifier = resort_colony }
@@ -338,10 +456,11 @@ building_psi_corps = {
 	destroy_trigger = {
 		exists = owner
 		NOT = {
-			owner = { 
+			owner = {
 				OR = {
-					has_ascension_perk = ap_mind_over_matter 
+					has_ascension_perk = ap_mind_over_matter
 					has_origin = origin_shroudwalker_apprentice
+					has_origin = origin_pd_shroud
 				}
 			}
 		}
@@ -503,8 +622,8 @@ building_gaiaseeders_1 = {
 		NOR = {
 			is_planet_class = pc_gaia
 			is_planet_class = pc_city
-			is_planet_class = pc_hive
-			is_planet_class = pc_machine
+			is_pd_hive_world = yes
+			is_pd_machine = yes
 			is_planet_class = pc_relic
 		}
 		is_artificial = no
@@ -518,8 +637,8 @@ building_gaiaseeders_1 = {
 		OR = {
 			is_planet_class = pc_gaia	# No double bonuses if player uses other tools to turn it into a Gaia world.
 			is_planet_class = pc_city
-			is_planet_class = pc_hive
-			is_planet_class = pc_machine
+			is_pd_hive_world = yes
+			is_pd_machine = yes
 			is_planet_class = pc_relic
 			NOT = { exists = owner }
 			owner = {
@@ -571,8 +690,8 @@ building_gaiaseeders_2 = {
 		OR = {
 			is_planet_class = pc_gaia
 			is_planet_class = pc_city
-			is_planet_class = pc_hive
-			is_planet_class = pc_machine
+			is_pd_hive_world = yes
+			is_pd_machine = yes
 			NOT = { exists = owner }
 			owner = {
 				NOR = {
@@ -617,8 +736,8 @@ building_gaiaseeders_3 = {
 		OR = {
 			is_planet_class = pc_gaia
 			is_planet_class = pc_city
-			is_planet_class = pc_hive
-			is_planet_class = pc_machine
+			is_pd_hive_world = yes
+			is_pd_machine = yes
 			NOT = { exists = owner }
 			owner = {
 				NOR = {
@@ -647,8 +766,8 @@ building_gaiaseeders_4 = {
 	destroy_trigger = {
 		OR = {
 			is_planet_class = pc_city
-			is_planet_class = pc_hive
-			is_planet_class = pc_machine
+			is_pd_hive_world = yes
+			is_pd_machine = yes
 			NOT = { exists = owner }
 			owner = {
 				NOR = {

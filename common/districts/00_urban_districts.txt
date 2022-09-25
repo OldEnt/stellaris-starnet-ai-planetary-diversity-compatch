@@ -354,7 +354,14 @@ district_hive = {
 
 	triggered_planet_modifier = {
 		potential = {
-			is_planet_class = pc_hive
+			OR = {
+				is_planet_class = pc_hive
+				is_planet_class = pc_hivetidallylocked
+				is_planet_class = pc_bioforge
+				is_planet_class = pc_biofort
+				is_planet_class = pc_megaflorafort
+				is_planet_class = pc_megafloraforge
+			}
 		}
 		modifier = {
 			planet_housing_add = 6
@@ -876,6 +883,7 @@ district_industrial = {
 				is_regular_empire = yes
 				is_crafter_empire = no
 			}
+			NOT = { has_designation = col_foundry }
 		}
 		text = job_artisan_effect_desc
 	}
@@ -887,6 +895,7 @@ district_industrial = {
 				is_regular_empire = yes
 				is_crafter_empire = yes
 			}
+			NOT = { has_designation = col_foundry }
 		}
 		text = job_artificer_effect_desc
 	}
@@ -909,6 +918,7 @@ district_industrial = {
 				is_regular_empire = yes
 				is_catalytic_empire = no
 			}
+			NOT = { has_designation = col_factory }
 		}
 		text = job_foundry_effect_desc
 	}
@@ -920,6 +930,7 @@ district_industrial = {
 				is_regular_empire = yes
 				is_catalytic_empire = yes
 			}
+			NOT = { has_designation = col_factory }
 		}
 		text = job_catalytic_technician_effect_desc
 	}
