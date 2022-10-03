@@ -4187,6 +4187,92 @@ col_bureau_machine = {
 	}
 }
 
+col_trophy_machine = {
+	icon = GFX_colony_type_bureaucratic
+
+	potential = {
+		exists = owner
+		owner = { has_valid_civic = civic_machine_servitor }
+		NOT = {
+			uses_district_set = habitat
+		}
+		is_special_colony_type = no
+	}
+
+	planet_modifier = {
+		planet_bio_trophies_produces_mult = 0.10
+		pop_growth_speed = 0.10
+	}
+
+	weight_modifier = {
+		base = 10
+		modifier = {
+			add = 5
+			has_designation = col_trophy_machine
+		}
+		modifier = {
+			add = 3
+			OR = {
+				num_buildings = { type = building_organic_sanctuary value >= 2 }
+				num_districts = { type = district_arcology_organic_housing value >= 2 }
+			}
+		}
+		modifier = {
+			add = 4
+			OR = {
+				num_buildings = { type = building_organic_sanctuary value >= 3 }
+				num_districts = { type = district_arcology_organic_housing value >= 3 }
+			}
+		}
+		modifier = {
+			add = 5
+			OR = {
+				num_buildings = { type = building_organic_sanctuary value >= 4 }
+				num_districts = { type = district_arcology_organic_housing value >= 4 }
+			}
+		}
+		modifier = {
+			add = 6
+			OR = {
+				num_buildings = { type = building_organic_sanctuary value >= 5 }
+				num_districts = { type = district_arcology_organic_housing value >= 5 }
+			}
+		}
+		modifier = {
+			add = 5
+			num_buildings = { type = building_organic_paradise value >= 1 }
+		}
+		modifier = {
+			add = 6
+			num_buildings = { type = building_organic_paradise value >= 2 }
+		}
+		modifier = {
+			factor = 0
+			AND = {
+				num_buildings = { type = building_organic_sanctuary value = 0 }
+				num_buildings = { type = building_organic_paradise value = 0 }
+				num_districts = { type = district_arcology_organic_housing value = 0 }
+			}
+		}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
+		}
+	}
+}
+
 col_habitat_bureau = {
 	icon = GFX_colony_type_hab_bureaucratic
 
