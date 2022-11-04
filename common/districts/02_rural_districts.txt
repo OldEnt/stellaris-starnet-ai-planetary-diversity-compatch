@@ -11,12 +11,16 @@ district_generator = {
 		uses_district_set = standard
 		NOT = { is_planet_class = pc_pd_wasteland }
 		NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
 	}
 
 	potential = {
 		uses_district_set = standard
 		NOT = { is_planet_class = pc_pd_wasteland }
 		NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
 	}
 
 	allow = {
@@ -174,12 +178,10 @@ district_mining = {
                 is_subterranean_empire = yes
             }
         }
-        NOT = {
-            is_planet_class = pc_pd_wasteland
-        }
-        NOT = {
-            is_planet_class = pc_pd_tidally_wasteland
-        }
+        NOT = { is_planet_class = pc_pd_wasteland }
+		NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
     }
     potential = {
         uses_district_set = standard
@@ -189,12 +191,10 @@ district_mining = {
                 is_subterranean_empire = yes
             }
         }
-        NOT = {
-            is_planet_class = pc_pd_wasteland
-        }
-        NOT = {
-            is_planet_class = pc_pd_tidally_wasteland
-        }
+        NOT = { is_planet_class = pc_pd_wasteland }
+		NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
     }
     allow = {
         NOT = {
@@ -348,12 +348,9 @@ district_farming = {
     max_for_deposits_on_planet = 15
     show_on_uncolonized = {
         uses_district_set = standard
-        NOT = {
-            is_planet_class = pc_pd_wasteland
-        }
-        NOT = {
-            is_planet_class = pc_pd_tidally_wasteland
-        }
+        NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
     }
     potential = {
         uses_district_set = standard
@@ -394,12 +391,9 @@ district_farming = {
                 }
             }
         }
-        NOT = {
-            is_planet_class = pc_pd_wasteland
-        }
-        NOT = {
-            is_planet_class = pc_pd_tidally_wasteland
-        }
+        NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
     }
     allow = {
         NOT = {
@@ -649,7 +643,9 @@ district_generator_uncapped = {
                 uses_district_set = shattered_ring_world
             }
             is_planet_class = pc_pd_wasteland
-            is_planet_class = pc_pd_tidally_wasteland
+			is_planet_class = pc_pd_tidally_wasteland
+			is_planet_class = pc_pd_mega_power
+			is_planet_class = pc_pd_mega_power_tidal
         }
     }
     potential = {
@@ -668,7 +664,9 @@ district_generator_uncapped = {
                 uses_district_set = shattered_ring_world
             }
             is_planet_class = pc_pd_wasteland
-            is_planet_class = pc_pd_tidally_wasteland
+			is_planet_class = pc_pd_tidally_wasteland
+			is_planet_class = pc_pd_mega_power
+			is_planet_class = pc_pd_mega_power_tidal
         }
     }
     allow = {
@@ -1092,6 +1090,8 @@ district_farming_uncapped = {
 			uses_district_set = pdnecroplanet
 			is_planet_class = pc_pd_wasteland
 			is_planet_class = pc_pd_tidally_wasteland
+			is_planet_class = pc_pd_mega_power
+			is_planet_class = pc_pd_mega_power_tidal
 		}
 	}
 
@@ -1111,11 +1111,14 @@ district_farming_uncapped = {
 						is_planet_class = pc_desertislands 
 						is_planet_class = pc_subarctic 
 						is_planet_class = pc_storm
+						is_planet_class = pc_pd_iceberg
 					}
 				}
 			}
 			is_planet_class = pc_pd_wasteland
 			is_planet_class = pc_pd_tidally_wasteland
+			is_planet_class = pc_pd_mega_power
+			is_planet_class = pc_pd_mega_power_tidal
 		}
 		NOT = {
 			AND = {
@@ -1128,6 +1131,8 @@ district_farming_uncapped = {
 	allow = {
 		NOT = { is_planet_class = pc_pd_wasteland }
 		NOT = { is_planet_class = pc_pd_tidally_wasteland }
+		NOT = { is_planet_class = pc_pd_mega_power }
+		NOT = { is_planet_class = pc_pd_mega_power_tidal }
 		NOT = { has_modifier = resort_colony }
 		str_food_district_allow = yes
 	}
@@ -1157,6 +1162,7 @@ district_farming_uncapped = {
 							is_planet_class = pc_desertislands 
 							is_planet_class = pc_subarctic 
 							is_planet_class = pc_storm
+							is_planet_class = pc_pd_iceberg
 						}
 					}
 				}

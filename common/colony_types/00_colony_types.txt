@@ -537,9 +537,6 @@ col_hive = {
 	icon = GFX_colony_type_urban
 
 	potential = {
-		exists = owner
-		owner = { is_ai = no }
-		owner = { is_hive_empire = yes }
 		NOR = {
 			uses_district_set = ring_world
 			uses_district_set = habitat
@@ -558,6 +555,9 @@ col_hive = {
 			uses_district_set = pdcorpoarc
 			uses_district_set = pdcrucible
 		}
+		exists = owner
+		owner = { is_ai = no }
+		owner = { is_hive_empire = yes }
 		is_special_colony_type = no
 	}
 
@@ -577,9 +577,6 @@ col_nexus = {
 	icon = GFX_colony_type_urban
 
 	potential = {
-		exists = owner
-		owner = { is_ai = no }
-		owner = { is_machine_empire = yes }
 		NOR = {
 			uses_district_set = machine_world
 			uses_district_set = ring_world
@@ -598,6 +595,11 @@ col_nexus = {
 			uses_district_set = pdmachinefort
 			uses_district_set = pdcorpoarc
 			uses_district_set = pdcrucible
+		}
+		exists = owner
+		owner = {
+			is_ai = no
+			is_machine_empire = yes
 		}
 		is_special_colony_type = no
 	}
@@ -1125,9 +1127,10 @@ col_factory = {
 		}
 	}
 
+	# Used by AI to estimate the current effects of this designation
 	ai_resource_current_conversion = {
-		alloys = -0.5
 		consumer_goods = 1
+		alloys = -0.5
 
 		trigger = {
 			owner = {
@@ -1623,6 +1626,7 @@ col_research = {
 			add = 8
 			num_buildings = { type = building_research_lab_3 value >= 1 }
 		}
+
 		modifier = {
 			factor = 0
 			num_buildings = { type = building_research_lab_1 value = 0 }
@@ -2069,9 +2073,12 @@ col_habitat_farming = {
 	icon = GFX_colony_type_habitat_farming
 
 	potential = {
-		exists = owner
-		owner = { is_ai = no }
 		uses_district_set = habitat
+		exists = owner
+		owner = {
+			is_ai = no
+			is_gestalt = no
+		}
 	}
 	custom_tooltip = col_habitat_farming_custom
 	planet_modifier = {
@@ -2083,7 +2090,6 @@ col_habitat_farming = {
 			exists = owner
 			owner = {
 				is_galactic_community_member = yes
-				is_gestalt = no
 			}
 			OR = {
 				is_active_resolution = "resolution_greatergood_five_year_plans"
@@ -2097,27 +2103,8 @@ col_habitat_farming = {
 		}
 	}
 
-	triggered_planet_modifier = {
-		potential = {
-			exists = owner
-			owner = {
-				is_galactic_community_member = yes
-				is_gestalt = yes
-			}
-			OR = {
-				is_active_resolution = "resolution_greatergood_five_year_plans"
-				is_active_resolution = "resolution_greatergood_greater_than_ourselves"
-				is_active_resolution = "resolution_greatergood_balance_in_the_middle"
-				is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
-			}
-		}
-		modifier = {
-			planet_jobs_simple_drone_produces_mult = 0.1
-		}
-	}
-
 	weight_modifier = {
-		base = 1000
+		base = 300
 		modifier = {
 			factor = 2
 			owner = { has_monthly_income = { resource = food value < 0 } }
@@ -2149,6 +2136,7 @@ col_habitat_gestalt_farming = {
 		uses_district_set = habitat
 		exists = owner
 		owner = {
+			is_ai = no
 			is_gestalt = yes
 		}
 	}
@@ -2176,7 +2164,7 @@ col_habitat_gestalt_farming = {
 	}
 
 	weight_modifier = {
-		base = 1000
+		base = 300
 		modifier = {
 			factor = 2
 			owner = { has_monthly_income = { resource = food value < 0 } }
@@ -2207,8 +2195,6 @@ col_habitat_fortress = {
 	icon = GFX_colony_type_habitat_fortress
 
 	potential = {
-        exists = owner
-        owner = { is_ai = no }
 		OR = {
 		uses_district_set = habitat
 		uses_district_set = pdarchive
@@ -2589,19 +2575,6 @@ col_rural_gestalt = {
 			uses_district_set = ring_world
 			uses_district_set = machine_world
 			uses_district_set = hive_world
-			uses_district_set = pdarchive
-			uses_district_set = pdecocity
-			uses_district_set = pdpalacearc
-			uses_district_set = pdplanethab	
-			uses_district_set = pdbioforge
-			uses_district_set = pdbiocapital
-			uses_district_set = pdmachinefactory
-			uses_district_set = pdmachinecapital
-			uses_district_set = pdfloraforge
-			uses_district_set = pdbiofort
-			uses_district_set = pdmachinefort
-			uses_district_set = pdcorpoarc
-			uses_district_set = pdcrucible
 		}
 		exists = owner
 		owner = { is_gestalt = yes }
@@ -3238,14 +3211,14 @@ col_ecu_mix = {
 	potential = {
 		exists = owner
         owner = { is_ai = no }
-        OR = {
-			uses_district_set = city_world
-			uses_district_set = pdecocity
-			uses_district_set = pdpalacearc
-			uses_district_set = pdmachinecapital
-			uses_district_set = pdmilarc
-			uses_district_set = pdmachinecapital
-			uses_district_set = pdcorpoarc
+		OR = {
+		uses_district_set = city_world
+		uses_district_set = pdecocity
+		uses_district_set = pdpalacearc
+		uses_district_set = pdmachinecapital
+		uses_district_set = pdmilarc
+		uses_district_set = pdmachinecapital
+		uses_district_set = pdcorpoarc
 		}
 	}
 
@@ -3567,6 +3540,7 @@ col_ecu_research = {
 
 	weight_modifier = {
 		base = 10
+
 		modifier = {
 			add = 5
 			owner = { has_monthly_income = { resource = physics_research value < 200 } }
@@ -3912,6 +3886,10 @@ col_bureau = {
 			num_buildings = { type = building_bureaucratic_3 value >= 2 }
 		}
 		modifier = {
+			factor = 1.3
+			has_planet_flag = str_acceptable_habitability
+		}
+		modifier = {
 			factor = 0
 			AND = {
 				num_buildings = { type = building_bureaucratic_1 value = 0 }
@@ -3921,8 +3899,20 @@ col_bureau = {
 			}
 		}
 		modifier = {
-			factor = 1.3
-			has_planet_flag = str_acceptable_habitability
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
 		}
 	}
 }
@@ -4019,6 +4009,10 @@ col_bureau_spiritualist = {
 			}
 		}
 		modifier = {
+			factor = 1.3
+			has_planet_flag = str_acceptable_habitability
+		}
+		modifier = {
 			factor = 0
 			AND = {
 				num_buildings = { type = building_temple value = 0 }
@@ -4031,8 +4025,20 @@ col_bureau_spiritualist = {
 			}
 		}
 		modifier = {
-			factor = 1.3
-			has_planet_flag = str_acceptable_habitability
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
 		}
 	}
 }
@@ -4098,6 +4104,10 @@ col_bureau_hive = {
 			num_buildings = { type = building_hive_confluence value >= 2 }
 		}
 		modifier = {
+			factor = 1.3
+			has_planet_flag = str_acceptable_habitability
+		}
+		modifier = {
 			factor = 0
 			AND = {
 				num_buildings = { type = building_hive_node value = 0 }
@@ -4106,8 +4116,20 @@ col_bureau_hive = {
 			}
 		}
 		modifier = {
-			factor = 1.3
-			has_planet_flag = str_acceptable_habitability
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
 		}
 	}
 }
@@ -4117,7 +4139,10 @@ col_bureau_machine = {
 
 	potential = {
 		exists = owner
-		owner = { is_machine_empire = yes }
+		owner = {
+			is_machine_empire = yes
+			NOT = { has_valid_civic = civic_machine_servitor }
+		}
 		NOR = {
 			uses_district_set = habitat
 			uses_district_set = pdcrucible
@@ -4180,10 +4205,22 @@ col_bureau_machine = {
 				num_buildings = { type = building_system_conflux value = 0 }
 			}
 		}
-		#	modifier = {
-		#		factor = 1.3
-		#		has_planet_flag = str_acceptable_habitability
-		#	}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
+		}
 	}
 }
 
@@ -4193,8 +4230,9 @@ col_trophy_machine = {
 	potential = {
 		exists = owner
 		owner = { has_valid_civic = civic_machine_servitor }
-		NOT = {
+		NOR = {
 			uses_district_set = habitat
+			uses_district_set = pdcrucible
 		}
 		is_special_colony_type = no
 	}
@@ -4338,6 +4376,22 @@ col_habitat_bureau = {
 				num_buildings = { type = building_bureaucratic_3 value = 0 }
 			}
 		}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			exists = sector
+			add = 1
+			sector = {
+				has_sector_focus = "unity"
+			}
+		}
 	}
 }
 
@@ -4432,6 +4486,22 @@ col_habitat_bureau_spiritualist = {
 				num_buildings = { type = building_sacrificial_temple_3 value = 0 }
 			}
 		}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
+		}
 	}
 }
 
@@ -4496,6 +4566,22 @@ col_habitat_bureau_hive = {
 				num_buildings = { type = building_hive_confluence value = 0 }
 			}
 		}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
+			}
+		}
 	}
 }
 
@@ -4558,6 +4644,22 @@ col_habitat_bureau_machine = {
 				num_buildings = { type = building_bureaucratic_2 value = 0 }
 				num_buildings = { type = building_network_junction value = 0 }
 				num_buildings = { type = building_system_conflux value = 0 }
+			}
+		}
+		modifier = {
+			factor = 0
+			exists = sector
+			sector = {
+				has_any_sector_focus = yes
+				not = { has_sector_focus = "unity" }
+				not = { has_sector_focus = "balanced" }
+			}
+		}
+		modifier = {
+			add = 1
+			exists = sector
+			sector = {
+				has_sector_focus = "unity"
 			}
 		}
 	}
