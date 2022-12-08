@@ -10,5 +10,5 @@ dependencies={
 	"StarTech AI"
 }
 name="StarNet AI - Planetary Diversity compatibility patch"
-supported_version="3.5.*"
+supported_version="3.6.*"
 picture="thumbnails.png"
